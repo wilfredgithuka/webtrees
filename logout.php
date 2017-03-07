@@ -15,8 +15,7 @@
  */
 namespace Fisharebest\Webtrees;
 
-define('WT_SCRIPT_NAME', 'logout.php');
-require './includes/session.php';
+require 'app/bootstrap.php';
 
 // The current tree (if any).
 $gedcom = Session::get('GEDCOM', '');

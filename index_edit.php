@@ -15,18 +15,13 @@
  */
 namespace Fisharebest\Webtrees;
 
-/**
- * Defined in session.php
- *
- * @global Tree $WT_TREE
- */
-global $WT_TREE;
-
 use Fisharebest\Webtrees\Controller\PageController;
 use Fisharebest\Webtrees\Functions\FunctionsDb;
 
-define('WT_SCRIPT_NAME', 'index_edit.php');
-require './includes/session.php';
+/** @global Tree $WT_TREE */
+global $WT_TREE;
+
+require 'app/bootstrap.php';
 
 $controller = new PageController;
 
@@ -88,20 +83,6 @@ if ($can_reset && Filter::post('default') === '1') {
 		$right = [];
 	}
 }
-// Define all the icons we're going to use
-$IconUarrow = 'icon-uarrow';
-$IconDarrow = 'icon-darrow';
-if (I18N::direction() === 'ltr') {
-	$IconRarrow  = 'icon-rarrow';
-	$IconLarrow  = 'icon-larrow';
-	$IconRDarrow = 'icon-rdarrow';
-	$IconLDarrow = 'icon-ldarrow';
-} else {
-	$IconRarrow  = 'icon-larrow';
-	$IconLarrow  = 'icon-rarrow';
-	$IconRDarrow = 'icon-ldarrow';
-	$IconLDarrow = 'icon-rdarrow';
-}
 
 $all_blocks = [];
 foreach (Module::getActiveBlocks($WT_TREE) as $name => $block) {
@@ -146,7 +127,9 @@ if ($action === 'update') {
 			}
 		}
 	}
-	if ($user_id) {
+	if ($user_id < 0 || $gedcom_id < 0 ) {
+		header('Location: ' . WT_BASE_URL . 'admin.php');
+	} elseif ($user_id > 0) {
 		header('Location: ' . WT_BASE_URL . 'index.php?ctype=user&ged=' . $WT_TREE->getNameUrl());
 	} else {
 		header('Location: ' . WT_BASE_URL . 'index.php?ctype=gedcom&ged=' . $WT_TREE->getNameUrl());
@@ -159,8 +142,6 @@ $controller
 	->pageHeader()
 	->addInlineJavascript('
 	/**
-	 * Move Up Block Javascript function
-	 *
 	 * This function moves the selected option up in the given select list
 	 *
 	 * @param String section_name the name of the select to move the options
@@ -178,8 +159,6 @@ $controller
 	}
 
 	/**
-	 * Move Down Block Javascript function
-	 *
 	 * This function moves the selected option down in the given select list
 	 *
 	 * @param String section_name the name of the select to move the options
@@ -198,8 +177,6 @@ $controller
 	}
 
 	/**
-	 * Move Block from one column to the other Javascript function
-	 *
 	 * This function moves the selected option down in the given select list
 	 *
 	 * @param String from_column the name of the select to move the option from
@@ -211,10 +188,10 @@ $controller
 		instruct = document.getElementById("instructions");
 		if ((to_select) && (from_select)) {
 			add_option = from_select.options[from_select.selectedIndex];
-			if (to_column != "available_select") {
+			if (to_column !== "available_select") {
 				to_select.options[to_select.length] = new Option(add_option.text, add_option.value);
 			}
-			if (from_column != "available_select") {
+			if (from_column !== "available_select") {
 				from_select.options[from_select.selectedIndex] = null; //remove from list
 			}
 		}
@@ -258,20 +235,20 @@ $controller
 		list1 = document.getElementById("main_select");
 		list2 = document.getElementById("available_select");
 		list3 = document.getElementById("right_select");
-		if (list_name=="main_select") {
+		if (list_name === "main_select") {
 			list2.selectedIndex = -1;
 			list3.selectedIndex = -1;
 		}
-		if (list_name=="available_select") {
+		if (list_name === "available_select") {
 			list1.selectedIndex = -1;
 			list3.selectedIndex = -1;
 		}
-		if (list_name=="right_select") {
+		if (list_name === "right_select") {
 			list1.selectedIndex = -1;
 			list2.selectedIndex = -1;
 		}
 	}
-	var block_descr = new Array();
+	var block_descr = { advice1: "&nbsp;"};
 	');
 
 	// Load Block Description array for use by javascript
@@ -280,16 +257,17 @@ $controller
 			'block_descr["' . $block_name . '"] = "' . Filter::escapeJs($block->getDescription()) . '";'
 		);
 	}
-	$controller->addInlineJavascript(
-		'block_descr["advice1"] = "' . I18N::translate('Select a block and use the arrows to move it.') . '";'
-	);
 ?>
 
-<h2><?php echo $controller->getPageTitle(); ?></h2>
+<h2><?= $controller->getPageTitle() ?></h2>
+
+<p>
+	<?= I18N::translate('Select a block and use the arrows to move it.') ?>
+</p>
 
 <form name="config_setup" method="post" action="index_edit.php?action=update" onsubmit="select_options();" >
-	<input type="hidden" name="user_id"   value="<?php echo $user_id; ?>">
-	<input type="hidden" name="gedcom_id" value="<?php echo $gedcom_id; ?>">
+	<input type="hidden" name="user_id"   value="<?= $user_id ?>">
+	<input type="hidden" name="gedcom_id" value="<?= $gedcom_id ?>">
 	<table border="1" id="change_blocks">
 		<tr>
 	<?php
@@ -307,10 +285,13 @@ $controller
 	echo '<tr>';
 	// NOTE: Row 2 column 1: Up/Down buttons for left (main) block list
 	echo '<td class="optionbox center vmiddle">';
-		echo '<a onclick="move_up_block(\'main_select\');" title="', I18N::translate('Move up'), '"class="', $IconUarrow, '"></a>';
+		echo FontAwesome::linkIcon('arrow-up', I18N::translate('Move up'), ['class' => 'btn btn-link', 'onclick' => 'return move_up_block("main_select");']);
 		echo '<br>';
-		echo '<a onclick="move_down_block(\'main_select\');" title="', I18N::translate('Move down'), '"class="', $IconDarrow, '"></a>';
-		echo '<br><br>';
+	echo FontAwesome::linkIcon('arrow-end', I18N::translate('Move right'), ['class' => 'btn btn-link', 'onclick' => 'return move_left_right_block("main_select", "right_select");']);
+	echo '<br>';
+	echo FontAwesome::linkIcon('delete', I18N::translate('Remove'), ['class' => 'btn btn-link', 'onclick' => 'return move_left_right_block("main_select", "available_select");']);
+	echo '<br>';
+	echo FontAwesome::linkIcon('arrow-down', I18N::translate('Move down'), ['class' => 'btn btn-link', 'onclick' => 'return move_down_block("main_select");']);
 	echo '</td>';
 	// NOTE: Row 2 column 2: Left (Main) block list
 	echo '<td class="optionbox center">';
@@ -322,11 +303,7 @@ $controller
 	echo '</td>';
 	// NOTE: Row 2 column 3: Left/Right buttons for left (main) block list
 	echo '<td class="optionbox center vmiddle">';
-		echo '<a onclick="move_left_right_block(\'main_select\', \'right_select\');" title="', I18N::translate('Move right'), '"class="', $IconRDarrow, '"></a>';
-		echo '<br>';
-		echo '<a onclick="move_left_right_block(\'main_select\', \'available_select\');" title="', I18N::translate('Remove'), '"class="', $IconRarrow, '"></a>';
-		echo '<br>';
-		echo '<a onclick="move_left_right_block(\'available_select\', \'main_select\');" title="', I18N::translate('Add'), '"class="', $IconLarrow, '"></a>';
+		echo FontAwesome::linkIcon('arrow-start', I18N::translate('Add'), ['class' => 'btn btn-link', 'onclick' => 'return move_left_right_block("available_select", "main_select");']);
 		echo '<br><br>';
 	echo '</td>';
 	// Row 2 column 4: Middle (Available) block list
@@ -339,11 +316,7 @@ $controller
 	echo '</td>';
 	// NOTE: Row 2 column 5: Left/Right buttons for right block list
 	echo '<td class="optionbox center vmiddle">';
-		echo '<a onclick="move_left_right_block(\'right_select\', \'main_select\');" title="', I18N::translate('Move left'), '"class="', $IconLDarrow, '"></a>';
-		echo '<br>';
-		echo '<a onclick="move_left_right_block(\'right_select\', \'available_select\');" title="', I18N::translate('Remove'), '"class="', $IconLarrow, '"></a>';
-		echo '<br>';
-		echo '<a onclick="move_left_right_block(\'available_select\', \'right_select\');" title="', I18N::translate('Add'), '"class="', $IconRarrow, '"></a>';
+		echo FontAwesome::linkIcon('arrow-end', I18N::translate('Add'), ['class' => 'btn btn-link', 'onclick' => 'return move_left_right_block("available_select", "right_select");']);
 		echo '<br><br>';
 	echo '</td>';
 	// NOTE: Row 2 column 6: Right block list
@@ -356,19 +329,22 @@ $controller
 	echo '</td>';
 	// NOTE: Row 2 column 7: Up/Down buttons for right block list
 	echo '<td class="optionbox center vmiddle">';
-		echo '<a onclick="move_up_block(\'right_select\');" title="', I18N::translate('Move up'), '"class="', $IconUarrow, '"></a>';
-		echo '<br>';
-		echo '<a onclick="move_down_block(\'right_select\');" title="', I18N::translate('Move down'), '"class="', $IconDarrow, '"></a>';
-		echo '<br><br>';
+	echo FontAwesome::linkIcon('arrow-up', I18N::translate('Move up'), ['class' => 'btn btn-link', 'onclick' => 'return move_up_block("right_select");']);
+	echo '<br>';
+	echo FontAwesome::linkIcon('arrow-start', I18N::translate('Move left'), ['class' => 'btn btn-link', 'onclick' => 'return move_left_right_block("right_select", "main_select");']);
+	echo '<br>';
+	echo FontAwesome::linkIcon('delete', I18N::translate('Remove'), ['class' => 'btn btn-link', 'onclick' => 'return move_left_right_block("right_select", "available_select");']);
+	echo '<br>';
+	echo FontAwesome::linkIcon('arrow-down', I18N::translate('Move down'), ['class' => 'btn btn-link', 'onclick' => 'return move_down_block("right_select");']);
 	echo '</td>';
 	echo '</tr>';
 	// NOTE: Row 3 columns 1-7: Summary description of currently selected block
 	echo '<tr><td class="descriptionbox wrap" colspan="7"><div id="instructions">';
-	echo I18N::translate('Select a block and use the arrows to move it.');
+	echo '&nbsp;';
 	echo '</div></td></tr>';
 	if ($can_reset) {
 		echo '<tr><td class="topbottombar" colspan="4">';
-		echo '<input type="checkbox" name="default" value="1">', I18N::translate('Restore the default block layout'), '</td>';
+		echo '<input type="checkbox" name="default" value="1"> ', I18N::translate('Restore the default block layout'), '</td>';
 		echo '<td class="topbottombar" colspan="3">';
 	} else {
 		echo '<td class="topbottombar" colspan="7">';

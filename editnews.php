@@ -19,15 +19,10 @@ use Fisharebest\Webtrees\Controller\SimpleController;
 use Fisharebest\Webtrees\Module\CkeditorModule;
 use PDO;
 
-/**
- * Defined in session.php
- *
- * @global Tree $WT_TREE
- */
+/** @global Tree $WT_TREE */
 global $WT_TREE;
 
-define('WT_SCRIPT_NAME', 'editnews.php');
-require './includes/session.php';
+require 'app/bootstrap.php';
 
 $controller = new SimpleController;
 $controller

@@ -21,9 +21,7 @@ use Fisharebest\Webtrees\Functions\Functions;
 use Fisharebest\Webtrees\Functions\FunctionsDate;
 use PclZip;
 
-define('WT_SCRIPT_NAME', 'admin_site_upgrade.php');
-
-require './includes/session.php';
+require 'app/bootstrap.php';
 
 // Check for updates
 $latest_version_txt = Functions::fetchLatestVersion();
