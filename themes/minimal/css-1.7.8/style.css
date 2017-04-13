@@ -15,6 +15,12 @@
 
 /* The minimal theme */
 
+/* Override Bootstrap formatting */
+.btn-link {
+	padding-left: 0.25rem;
+	padding-right: 0.25rem;
+}
+
 /*
  * Any element that is loaded dynamically has the class wt-ajax-load.
  * We can provide a "loading" placeholder for empty elements with this class.

@@ -430,9 +430,9 @@ class FunctionsPrint {
 				if ($map_lati && $map_long) {
 					$map_lati = trim(strtr($map_lati, 'NSEW,�', ' - -. ')); // S5,6789 ==> -5.6789
 					$map_long = trim(strtr($map_long, 'NSEW,�', ' - -. ')); // E3.456� ==> 3.456
-					$html .= FontAwesome::linkIcon('google-maps', I18N::translate('Google Maps™'), ['url' => 'https://maps.google.com/maps?q=' . $map_lati . ',' . $map_long, 'rel' => 'nofollow']);
-					$html .= FontAwesome::linkIcon('bing-maps', I18N::translate('Bing Maps™'), ['url' => 'https://www.bing.com/maps/?lvl=15&cp=' . $map_lati . '~' . $map_long, 'rel' => 'nofollow']);
-					$html .= FontAwesome::linkIcon('openstreetmap', I18N::translate('OpenStreetMap™'), ['url' => 'https://www.openstreetmap.org/#map=15/' . $map_lati . '/' . $map_long, 'rel' => 'nofollow']);
+					$html .= FontAwesome::linkIcon('google-maps', I18N::translate('Google Maps™'), ['class' => 'btn btn-link', 'url' => 'https://maps.google.com/maps?q=' . $map_lati . ',' . $map_long, 'rel' => 'nofollow']);
+					$html .= FontAwesome::linkIcon('bing-maps', I18N::translate('Bing Maps™'), ['class' => 'btn btn-link', 'url' => 'https://www.bing.com/maps/?lvl=15&cp=' . $map_lati . '~' . $map_long, 'rel' => 'nofollow']);
+					$html .= FontAwesome::linkIcon('openstreetmap', I18N::translate('OpenStreetMap™'), ['class' => 'btn btn-link', 'url' => 'https://www.openstreetmap.org/#map=15/' . $map_lati . '/' . $map_long, 'rel' => 'nofollow']);
 				}
 				if (preg_match('/\d NOTE (.*)/', $placerec, $match)) {
 					$html .= '<br>' . self::printFactNotes($placerec, 3);

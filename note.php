@@ -136,7 +136,7 @@ if (Module::getModuleByName('GEDFact_assistant')) {
 						<?= I18N::translate('Shared note') ?>
 						<?php if (Auth::isEditor($controller->record->getTree())) { ?>
 							<div class="editfacts">
-								<?= FontAwesome::linkIcon('edit', I18N::translate('Edit'), ['href' => 'edit_interface.php?action=editnote&ged=' . $controller->record->getTree()->getNameUrl() . '&xref=' . $controller->record->getXref()]) ?>
+								<?= FontAwesome::linkIcon('edit', I18N::translate('Edit'), ['class' => 'btn btn-link', 'href' => 'edit_interface.php?action=editnote&ged=' . $controller->record->getTree()->getNameUrl() . '&xref=' . $controller->record->getXref()]) ?>
 							</div>
 						<?php } ?>
 					</td>

@@ -195,8 +195,8 @@ class IndividualController extends GedcomRecordController {
 
 		if ($this->record->canEdit() && !$fact->isPendingDeletion()) {
 			$edit_links =
-				FontAwesome::linkIcon('delete', I18N::translate('Delete this name'), ['href' => '#', 'onclick' => 'return delete_fact("' . I18N::translate('Are you sure you want to delete this fact?') . '", "' . $this->record->getXref() . '", "' . $fact->getFactId() . '");']) .
-				FontAwesome::linkIcon('edit', I18N::translate('Edit the name'), ['href' => 'edit_interface.php?action=editname&xref=' . $this->record->getXref() . '&fact_id=' . $fact->getFactId() . '&ged=' . $this->record->getTree()->getNameHtml()]);
+				FontAwesome::linkIcon('delete', I18N::translate('Delete this name'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return delete_fact("' . I18N::translate('Are you sure you want to delete this fact?') . '", "' . $this->record->getXref() . '", "' . $fact->getFactId() . '");']) .
+				FontAwesome::linkIcon('edit', I18N::translate('Edit the name'), ['class' => 'btn btn-link', 'href' => 'edit_interface.php?action=editname&xref=' . $this->record->getXref() . '&fact_id=' . $fact->getFactId() . '&ged=' . $this->record->getTree()->getNameHtml()]);
 		} else {
 			$edit_links = '';
 		}
@@ -243,7 +243,7 @@ class IndividualController extends GedcomRecordController {
 		}
 
 		if ($individual->canEdit() && !$fact->isPendingDeletion()) {
-			$edit_links = FontAwesome::linkIcon('edit', I18N::translate('Edit the gender'), ['href' => 'edit_interface.php?action=edit&xref=' . $individual->getXref() . '&fact_id=' . $fact->getFactId() . '&ged=' . $individual->getTree()->getNameHtml() ]);
+			$edit_links = FontAwesome::linkIcon('edit', I18N::translate('Edit the gender'), ['class' => 'btn btn-link', 'href' => 'edit_interface.php?action=edit&xref=' . $individual->getXref() . '&fact_id=' . $fact->getFactId() . '&ged=' . $individual->getTree()->getNameHtml() ]);
 
 		} else {
 			$edit_links = '';

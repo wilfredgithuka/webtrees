@@ -5905,10 +5905,8 @@ class Stats {
 				if (Auth::id() != $user->getUserId() && $user->getPreference('contactmethod') != 'none') {
 					if ($type == 'list') {
 						$content .= '<br>';
-					} else {
-						$content .= ' ';
 					}
-					$content .= FontAwesome::linkIcon('email', I18N::translate('Send a message'), ['href' => 'message.php?to=' . Filter::escapeUrl($user->getUserName())]);
+					$content .= FontAwesome::linkIcon('email', I18N::translate('Send a message'), ['class' => 'btn btn-link', 'href' => 'message.php?to=' . Filter::escapeUrl($user->getUserName())]);
 				}
 				if ($type == 'list') {
 					$content .= '</li>';

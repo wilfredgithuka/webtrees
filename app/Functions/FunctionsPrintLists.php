@@ -1049,7 +1049,7 @@ class FunctionsPrintLists {
 			// Last change
 			$html .= '<td data-sort="' . $source->lastChangeTimestamp(true) . '">' . $source->lastChangeTimestamp() . '</td>';
 			// Delete
-			$html .= '<td>' . FontAwesome::linkIcon('delete', I18N::translate('Delete'), ['href' => '#', 'onclick' => 'return delete_record("' . I18N::translate('Are you sure you want to delete “%s”?', Filter::escapeJs(Filter::unescapeHtml($source->getFullName()))) . '", "' . $source->getXref() . '");']) . '</td>';
+			$html .= '<td>' . FontAwesome::linkIcon('delete', I18N::translate('Delete'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return delete_record("' . I18N::translate('Are you sure you want to delete “%s”?', Filter::escapeJs(Filter::unescapeHtml($source->getFullName()))) . '", "' . $source->getXref() . '");']) . '</td>';
 			$html .= '</tr>';
 		}
 		$html .= '</tbody></table>';
@@ -1123,7 +1123,7 @@ class FunctionsPrintLists {
 			// Last change
 			$html .= '<td data-sort="' . $note->lastChangeTimestamp(true) . '">' . $note->lastChangeTimestamp() . '</td>';
 			// Delete
-			$html .= '<td>' . FontAwesome::linkIcon('delete', I18N::translate('Delete'), ['href' => '#', 'onclick' => 'return delete_record("' . I18N::translate('Are you sure you want to delete “%s”?', Filter::escapeJs(Filter::unescapeHtml($note->getFullName()))) . '", "' . $note->getXref() . '");']) . '</td>';
+			$html .= '<td>' . FontAwesome::linkIcon('delete', I18N::translate('Delete'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return delete_record("' . I18N::translate('Are you sure you want to delete “%s”?', Filter::escapeJs(Filter::unescapeHtml($note->getFullName()))) . '", "' . $note->getXref() . '");']) . '</td>';
 			$html .= '</tr>';
 		}
 		$html .= '</tbody></table>';
@@ -1186,7 +1186,7 @@ class FunctionsPrintLists {
 			// Last change
 			$html .= '<td data-sort="' . $repository->lastChangeTimestamp(true) . '">' . $repository->lastChangeTimestamp() . '</td>';
 			// Delete
-			$html .= '<td>' . FontAwesome::linkIcon('delete', I18N::translate('Delete'), ['href' => '#', 'onclick' => 'return delete_record("' . I18N::translate('Are you sure you want to delete “%s”?', Filter::escapeJs(Filter::unescapeHtml($repository->getFullName()))) . '", "' . $repository->getXref() . '");']) . '</td>';
+			$html .= '<td>' . FontAwesome::linkIcon('delete', I18N::translate('Delete'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return delete_record("' . I18N::translate('Are you sure you want to delete “%s”?', Filter::escapeJs(Filter::unescapeHtml($repository->getFullName()))) . '", "' . $repository->getXref() . '");']) . '</td>';
 			$html .= '</tr>';
 		}
 		$html .= '</tbody></table></div>';
