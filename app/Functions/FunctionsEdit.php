@@ -31,6 +31,7 @@ use Fisharebest\Webtrees\Date;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\Filter;
+use Fisharebest\Webtrees\FontAwesome;
 use Fisharebest\Webtrees\GedcomCode\GedcomCodeAdop;
 use Fisharebest\Webtrees\GedcomCode\GedcomCodeName;
 use Fisharebest\Webtrees\GedcomCode\GedcomCodePedi;
@@ -455,7 +456,7 @@ class FunctionsEdit {
 	 */
 	public static function printCalendarPopup($id) {
 		return
-			' <a href="#" onclick="cal_toggleDate(\'caldiv' . $id . '\', \'' . $id . '\'); return false;" class="icon-button_calendar" title="' . I18N::translate('Select a date') . '"></a>' .
+			FontAwesome::linkIcon('calendar', I18N::translate('Select a date'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return calendarWidget("caldiv' . $id . '", "' . $id . '");']) .
 			'<div id="caldiv' . $id . '" style="position:absolute;visibility:hidden;background-color:white;z-index:1000;"></div>';
 	}
 

@@ -24,12 +24,15 @@ namespace Fisharebest\Webtrees;
 class FontAwesome extends Html {
 	/** Which font-awesome icon to use for which action/entity */
 	const ICONS = [
+		'calendar'           => 'fa fa-calendar wt-icon-calendar',
 		'copy'               => 'fa fa-copy wt-icon-copy',
 		'delete'             => 'fa fa-trash-o wt-icon-delete',
 		'edit'               => 'fa fa-pencil wt-icon-edit',
 		'help'               => 'fa fa-info-circle wt-icon-help',
 		'email'              => 'fa fa-envelope-o wt-icon-email',
+		'keyboard'           => 'fa fa-keyboard-o wt-icon-keyboard',
 		'preferences'        => 'fa fa-wrench wt-icon-preferences',
+		'save'               => 'fa fa-check wt-icon-save',
 		// Arrows (start/end variants require fontawesome-rtl library)
 		'arrow-down'         => 'fa fa-arrow-down wt-icon-arrow-down',
 		'arrow-end'          => 'fa fa-arrow-end wt-icon-arrow-end',

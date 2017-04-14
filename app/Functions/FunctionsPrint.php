@@ -645,7 +645,7 @@ class FunctionsPrint {
 	 * @return string
 	 */
 	public static function printSpecialCharacterLink($element_id) {
-		return '<span onclick="findSpecialChar(document.getElementById(\'' . $element_id . '\')); if (window.updatewholename) { updatewholename(); } return false;" class="icon-button_keyboard" title="' . I18N::translate('Find a special character') . '"></span>';
+		return FontAwesome::linkIcon('keyboard', I18N::translate('Find a special character'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'findSpecialChar(document.getElementById("' . $element_id . '")); if (window.updatewholename) { updatewholename(); } return false;']);
 	}
 
 	/**

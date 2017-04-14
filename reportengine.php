@@ -227,7 +227,7 @@ case 'setup':
 			echo '<input type="hidden" name="type[', Filter::escapeHtml($input['name']), ']" value="', Filter::escapeHtml($input['lookup']), '">';
 			if ($input['lookup'] == 'INDI') {
 			} elseif ($input['lookup'] == 'DATE') {
-				echo ' <a href="#" onclick="cal_toggleDate(\'div_', Filter::escapeJs($input['name']), '\', \'', Filter::escapeJs($input['name']), '\'); return false;" class="icon-button_calendar" title="', I18N::translate('Select a date'), '"></a>';
+				echo FontAwesome::linkIcon('calendar', I18N::translate('Select a date'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return calendarWidget("div_' . Filter::escapeJs($input['name']) . '", "' . Filter::escapeJs($input['name']) . '");']);
 				echo '<div id="div_', Filter::escapeHtml($input['name']), '" style="position:absolute;visibility:hidden;background-color:white;"></div>';
 			}
 		}

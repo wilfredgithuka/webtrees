@@ -442,23 +442,16 @@ function cal_setWeekStart (day) {
   }
 }
 
-function cal_toggleDate (dateDivId, dateFieldId) {
+function calendarWidget (dateDivId, dateFieldId) {
   var dateDiv = document.getElementById(dateDivId);
-  if (!dateDiv) {
-    return false;
-  }
-
+  var dateField = document.getElementById(dateFieldId);
+  
   if (dateDiv.style.visibility === 'visible') {
     dateDiv.style.visibility = 'hidden';
     return false;
   }
   if (dateDiv.style.visibility === 'show') {
     dateDiv.style.visibility = 'hide';
-    return false;
-  }
-
-  var dateField = document.getElementById(dateFieldId);
-  if (!dateField) {
     return false;
   }
 
@@ -480,6 +473,7 @@ function cal_toggleDate (dateDivId, dateFieldId) {
     dateDiv.style.visibility = 'show';
     return false;
   }
+
   return false;
 }
 
@@ -601,7 +595,7 @@ function cal_updateCalendar (dateFieldId, dateDivId) {
 
 function cal_dateClicked (dateFieldId, dateDivId, year, month, day) {
   cal_setDateField(dateFieldId, year, month, day);
-  cal_toggleDate(dateDivId, dateFieldId);
+  calendarWidget(dateDivId, dateFieldId);
   return false;
 }
 
@@ -610,7 +604,7 @@ function findWindow (ged, type, pastefield, queryParams) {
   queryParams.type = type;
   queryParams.ged = typeof ged === 'undefined' ? WT_GEDCOM : ged;
   window.pastefield = pastefield;
-  window.open('find.php?' + $.param(queryParams), '_blank', find_window_specs);
+  window.open('find.php?' + $.param(queryParams), '_blank');
   return false;
 }
 

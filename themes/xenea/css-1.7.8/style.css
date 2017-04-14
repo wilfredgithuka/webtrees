@@ -39,12 +39,14 @@
  * .wt-icon-arrow-start (left on LTR, right on RTL)
  * .wt-icon-arrow-up
  * .wt-icon-bing-maps
+ * .wt-icon-calendar
  * .wt-icon-copy
  * .wt-icon-delete
  * .wt-icon-edit
  * .wt-icon-email
  * .wt-icon-help
  * .wt-icon-google-maps
+ * .wt-icon-keyboard
  * .wt-icon-note
  * .wt-icon-openstreetmap
  * .wt-icon-preferences
@@ -119,6 +121,12 @@ a > .wt-icon-arrow-up:hover::before {
 	content: url(icons/bing-maps.png);
 }
 
+.wt-icon-calendar::before {
+	width: 19px;
+	height: 15px;
+	content: url(icons/calendar.png)
+}
+
 .wt-icon-copy::before {
 	width: 16px;
 	height: 16px;
@@ -147,6 +155,12 @@ a > .wt-icon-arrow-up:hover::before {
 	width: 16px;
 	height: 16px;
 	content: url(icons/google-maps.png);
+}
+
+.wt-icon-keyboard::before {
+	width: 30px;
+	height: 15px;
+	content: url(icons/keyboard.png);
 }
 
 .wt-icon-note::before {
@@ -3508,13 +3522,6 @@ div.faq_body {
 	background-image: url(images/buttons/addsource.png);
 }
 
-.icon-button_calendar {
-	width: 19px;
-	height: 15px;
-	background-image: url(images/buttons/calendar.png);
-	vertical-align: middle;
-}
-
 .icon-button_family {
 	width: 14px;
 	height: 15px;
@@ -3549,13 +3556,6 @@ div.faq_body {
 	width: 11px;
 	height: 15px;
 	background-image: url(images/buttons/indi.png);
-}
-
-.icon-button_keyboard {
-	width: 30px;
-	height: 15px;
-	background-image: url(images/buttons/keyboard.png);
-	vertical-align: middle;
 }
 
 .icon-button_media {
