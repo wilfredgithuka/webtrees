@@ -43,6 +43,7 @@
  * .wt-icon-delete
  * .wt-icon-edit
  * .wt-icon-email
+ * .wt-icon-help
  * .wt-icon-google-maps
  * .wt-icon-note
  * .wt-icon-openstreetmap
@@ -3509,14 +3510,6 @@ div.faq_body {
 	background-image: url(images/sfamily.png);
 }
 
-.icon-help {
-	cursor: help;
-	margin: 0 5px;
-	width: 15px;
-	height: 15px;
-	background-image: url(images/help.png);
-}
-
 .icon-indi-list {
 	width: 50px;
 	height: 50px;
@@ -3539,24 +3532,6 @@ div.faq_body {
 	width: 24px;
 	height: 24px;
 	background-image: url(images/media.png);
-}
-
-.icon-media-next {
-	width: 20px;
-	height: 20px;
-	background-image: url(images/rdarrow.png);
-}
-
-.icon-media-play {
-	width: 20px;
-	height: 20px;
-	background-image: url(images/rarrow.png);
-}
-
-.icon-media-prev {
-	width: 20px;
-	height: 20px;
-	background-image: url(images/ldarrow.png);
 }
 
 .icon-media-shuffle {

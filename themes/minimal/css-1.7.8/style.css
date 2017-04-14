@@ -43,6 +43,7 @@
  * .wt-icon-delete
  * .wt-icon-edit
  * .wt-icon-email
+ * .wt-icon-help
  * .wt-icon-google-maps
  * .wt-icon-note
  * .wt-icon-openstreetmap
@@ -3142,14 +3143,6 @@ div.faq_body {
 	width: 20px;
 	height: 20px;
 	background-image: url(images/family.png);
-}
-
-.icon-help {
-	cursor: help;
-	margin: 0 5px;
-	width: 15px;
-	height: 15px;
-	background-image: url(images/help.png);
 }
 
 .icon-indi-list {

@@ -27,6 +27,7 @@ class FontAwesome extends Html {
 		'copy'               => 'fa fa-copy wt-icon-copy',
 		'delete'             => 'fa fa-trash-o wt-icon-delete',
 		'edit'               => 'fa fa-pencil wt-icon-edit',
+		'help'               => 'fa fa-info-circle wt-icon-help',
 		'email'              => 'fa fa-envelope-o wt-icon-email',
 		'preferences'        => 'fa fa-wrench wt-icon-preferences',
 		// Arrows (start/end variants require fontawesome-rtl library)
