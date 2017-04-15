@@ -95,7 +95,7 @@ $changes = Database::prepare("SELECT 1 FROM `##change` WHERE status='pending' LI
 
 if ($changes) {
 	echo '<br>', I18N::translate('You should accept or reject all pending changes before upgrading.'), $icon_failure;
-	echo '<br><button onclick="window.open(\'edit_changes.php\',\'_blank\', chan_window_specs); return false;"">', I18N::translate('Pending changes'), '</button>';
+	echo '<br><a class="btn btn-primary" href="edit_changes.php">', I18N::translate('Pending changes'), '</a>';
 	echo '</li></ul></form>';
 
 	return;
