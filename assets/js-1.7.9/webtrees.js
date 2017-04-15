@@ -445,7 +445,7 @@ function cal_setWeekStart (day) {
 function calendarWidget (dateDivId, dateFieldId) {
   var dateDiv = document.getElementById(dateDivId);
   var dateField = document.getElementById(dateFieldId);
-  
+
   if (dateDiv.style.visibility === 'visible') {
     dateDiv.style.visibility = 'hidden';
     return false;

@@ -186,7 +186,7 @@ class FunctionsPrint {
 		require 'help_text.php';
 
 		return
-			FontAwesome::linkIcon('help', I18N::translate('Help'), ['class' => 'btn btn-link', 'data-toggle' => 'modal', 'data-target' => '#wt-help-modal']) . '
+			FontAwesome::linkIcon('help', I18N::translate('Help'), ['class' => 'btn btn-link', 'data-toggle' => 'modal', 'href' => '#', 'data-target' => '#wt-help-modal']) . '
 			<div class="modal fade" id="wt-help-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">

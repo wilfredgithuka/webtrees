@@ -77,10 +77,10 @@ if ($can_reset && Filter::post('default') === '1') {
 		$main = [];
 	}
 
-	if (isset($_REQUEST['right'])) {
-		$right = $_REQUEST['right'];
+	if (isset($_REQUEST['side'])) {
+		$side = $_REQUEST['side'];
 	} else {
-		$right = [];
+		$side = [];
 	}
 }
 
@@ -102,7 +102,7 @@ if ($action === 'update') {
 		if ($location === 'main') {
 			$new_blocks = $main;
 		} else {
-			$new_blocks = $right;
+			$new_blocks = $side;
 		}
 		foreach ($new_blocks as $order => $block_name) {
 			if (is_numeric($block_name)) {
@@ -121,7 +121,7 @@ if ($action === 'update') {
 		}
 		// deleted blocks
 		foreach ($blocks[$location] as $block_id => $block_name) {
-			if (!in_array($block_id, $main) && !in_array($block_id, $right)) {
+			if (!in_array($block_id, $main) && !in_array($block_id, $side)) {
 				Database::prepare("DELETE FROM `##block_setting` WHERE block_id=?")->execute([$block_id]);
 				Database::prepare("DELETE FROM `##block`         WHERE block_id=?")->execute([$block_id]);
 			}
@@ -222,7 +222,7 @@ $controller->pageHeader();
         section_select.options[i].selected=true;
       }
     }
-    section_select = document.getElementById("right_select");
+    section_select = document.getElementById("side_select");
     if (section_select) {
       for (i = 0; i < section_select.length; i++) {
         section_select.options[i].selected=true;
@@ -248,13 +248,13 @@ $controller->pageHeader();
     }
     if (list_name === "main_select") {
       document.getElementById("available_select").selectedIndex = -1;
-      document.getElementById("right_select").selectedIndex = -1;
+      document.getElementById("side_select").selectedIndex = -1;
     }
     if (list_name === "available_select") {
       document.getElementById("main_select").selectedIndex = -1;
-      document.getElementById("right_select").selectedIndex = -1;
+      document.getElementById("side_select").selectedIndex = -1;
     }
-    if (list_name === "right_select") {
+    if (list_name === "side_select") {
       document.getElementById("main_select").selectedIndex = -1;
       document.getElementById("available_select").selectedIndex = -1;
     }
@@ -288,7 +288,7 @@ $controller->pageHeader();
 					</label>
 				</th>
 				<th class="descriptionbox center vmiddle" colspan="2">
-					<label for="right_select">
+					<label for="side_select">
 						<?= I18N::translate('Right section blocks') ?>
 					</label>
 				</th>
@@ -299,14 +299,14 @@ $controller->pageHeader();
 				<td class="optionbox center vmiddle">
 					<?= FontAwesome::linkIcon('arrow-up', I18N::translate('Move up'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_up_block("main_select");']) ?>
 					<br>
-					<?= FontAwesome::linkIcon('arrow-end', I18N::translate('Move right'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("main_select", "right_select");']) ?>
+					<?= FontAwesome::linkIcon('arrow-end', I18N::translate('Move right'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("main_select", "side_select");']) ?>
 					<br>
 						<?= FontAwesome::linkIcon('delete', I18N::translate('Remove'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("main_select", "available_select");']) ?>
 					<br>
 					<?= FontAwesome::linkIcon('arrow-down', I18N::translate('Move down'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_down_block("main_select");']) ?>
 				</td>
 				<td class="optionbox center">
-					<select multiple="multiple" id="main_select" name="right[]" size="10" onchange="show_description('main_select');">
+					<select multiple="multiple" id="main_select" name="main[]" size="10" onchange="show_description('main_select');">
 						<?php foreach ($blocks['main'] as $block_id => $block_name): ?>
 							<option value="<?= $block_id ?>">
 								<?= $all_blocks[$block_name]->getTitle() ?>
@@ -327,10 +327,10 @@ $controller->pageHeader();
 					</select>
 				</td>
 				<td class="optionbox center vmiddle">
-					<?= FontAwesome::linkIcon('arrow-end', I18N::translate('Add'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("available_select", "right_select");']) ?>
+					<?= FontAwesome::linkIcon('arrow-end', I18N::translate('Add'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("available_select", "side_select");']) ?>
 				</td>
 				<td class="optionbox center">
-					<select multiple="multiple" id="right_select" name="right[]" size="10" onchange="show_description('right_select');">
+					<select multiple="multiple" id="side_select" name="side[]" size="10" onchange="show_description('side_select');">
 						<?php foreach ($blocks['side'] as $block_id => $block_name): ?>
 							<option value="<?= $block_id ?>">
 								<?= $all_blocks[$block_name]->getTitle() ?>
@@ -339,13 +339,13 @@ $controller->pageHeader();
 					</select>
 				</td>
 				<td class="optionbox center vmiddle">
-					<?= FontAwesome::linkIcon('arrow-up', I18N::translate('Move up'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_up_block("right_select");']) ?>
+					<?= FontAwesome::linkIcon('arrow-up', I18N::translate('Move up'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_up_block("side_select");']) ?>
 					<br>
-					<?= FontAwesome::linkIcon('arrow-start', I18N::translate('Move left'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("right_select", "main_select");']) ?>
+					<?= FontAwesome::linkIcon('arrow-start', I18N::translate('Move left'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("side_select", "main_select");']) ?>
 					<br>
-					<?= FontAwesome::linkIcon('delete', I18N::translate('Remove'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("right_select", "available_select");']) ?>
+					<?= FontAwesome::linkIcon('delete', I18N::translate('Remove'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_left_right_block("side_select", "available_select");']) ?>
 					<br>
-					<?= FontAwesome::linkIcon('arrow-down', I18N::translate('Move down'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_down_block("right_select");']) ?>
+					<?= FontAwesome::linkIcon('arrow-down', I18N::translate('Move down'), ['class' => 'btn btn-link', 'href' => '#', 'onclick' => 'return move_down_block("side_select");']) ?>
 				</td>
 			</tr>
 		</tbody>
